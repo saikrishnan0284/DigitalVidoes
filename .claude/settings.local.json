@@ -11,7 +11,13 @@
       "Bash(curl -s http://localhost:27017)",
       "Bash(redis-cli ping *)",
       "Bash(curl -s http://localhost:9001)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git remote *)",
+      "Bash(git branch *)",
+      "Bash(git push *)",
+      "Bash(git fetch *)",
+      "Bash(git checkout *)"
     ]
   }
 }
