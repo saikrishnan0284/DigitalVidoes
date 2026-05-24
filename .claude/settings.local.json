@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(docker *)",
+      "PowerShell(Start-Process \"C:\\\\Program Files\\\\Docker\\\\Docker\\\\Docker Desktop.exe\")",
+      "Bash(docker-compose up *)",
+      "Bash(podman *)",
+      "Bash(podman-compose --version)",
+      "Bash(pip install *)",
+      "Bash(python3 -m pip install podman-compose)",
+      "Bash(curl -s http://localhost:27017)",
+      "Bash(redis-cli ping *)",
+      "Bash(curl -s http://localhost:9001)",
+      "Bash(git add *)"
+    ]
+  }
+}

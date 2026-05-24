@@ -8,7 +8,10 @@ All configuration files have been created and dependencies installed:
 - ✅ `web/.env` - Web app configuration  
 - ✅ `mobile/.env` - Mobile app (IP: 192.168.0.105)
 - ✅ All npm dependencies installed
-- ✅ Start scripts created
+- ✅ **Podman services configured and RUNNING** 🐳
+  - MongoDB (port 27017)
+  - Redis (port 6379)
+  - MinIO (ports 9000, 9001)
 
 ---
 
@@ -16,10 +19,10 @@ All configuration files have been created and dependencies installed:
 
 ### ⚡ Option 1: One-Click Start (Windows)
 
-**Just double-click:** `START_ALL.bat`
+**Just double-click:** `START_ALL_TERMINALS.bat`
 
 This automatically:
-1. Starts Docker services (MongoDB, Redis, MinIO)
+1. Starts Podman services (MongoDB, Redis, MinIO)
 2. Opens Backend terminal
 3. Opens Web terminal
 4. Opens Mobile terminal
