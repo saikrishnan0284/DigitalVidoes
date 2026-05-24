@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peaceful Mountain Lake View - 1990s Village Scene</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            overflow: hidden;
+            background: #87CEEB;
+        }
+
+        .scene {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sky with sunrise gradient */
+        .sky {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom,
+                #FFD700 0%,
+                #FFA500 15%,
+                #FF8C69 30%,
+                #87CEEB 50%,
+                #B0E0E6 100%);
+            z-index: 1;
+        }
+
+        /* Sun */
+        .sun {
+            position: absolute;
+            top: 10%;
+            right: 15%;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, #FFF700, #FFD700, #FFA500);
+            border-radius: 50%;
+            box-shadow: 0 0 60px rgba(255, 215, 0, 0.8);
+            animation: glow 4s infinite alternate;
+            z-index: 2;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 60px rgba(255, 215, 0, 0.6); }
+            to { box-shadow: 0 0 100px rgba(255, 215, 0, 1); }
+        }
+
+        /* Clouds */
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 100px;
+            z-index: 3;
+            animation: float 60s infinite linear;
+        }
+
+        .cloud::before,
+        .cloud::after {
+            content: '';
+            position: absolute;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 100px;
+        }
+
+        .cloud1 {
+            width: 100px;
+            height: 40px;
+            top: 15%;
+            left: 20%;
+            animation-duration: 80s;
+        }
+
+        .cloud1::before {
+            width: 50px;
+            height: 40px;
+            top: -20px;
+            left: 10px;
+        }
+
+        .cloud1::after {
+            width: 60px;
+            height: 30px;
+            top: -10px;
+            right: 10px;
+        }
+
+        .cloud2 {
+            width: 120px;
+            height: 45px;
+            top: 25%;
+            left: 60%;
+            animation-duration: 100s;
+        }
+
+        .cloud2::before {
+            width: 55px;
+            height: 45px;
+            top: -22px;
+            left: 15px;
+        }
+
+        .cloud2::after {
+            width: 65px;
+            height: 35px;
+            top: -12px;
+            right: 15px;
+        }
+
+        @keyframes float {
+            from { transform: translateX(0); }
+            to { transform: translateX(-100vw); }
+        }
+
+        /* Beautiful Mountain Range in Background */
+        .hills-container {
+            position: absolute;
+            bottom: 50%;
+            left: 0;
+            width: 100%;
+            height: 35%;
+            z-index: 4;
+        }
+
+        /* Multiple mountain layers for depth */
+        .mountain-layer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Back mountains (furthest) */
+        .mountain-back {
+            left: 0;
+            height: 200px;
+            background: linear-gradient(to bottom, #5a7d8c, #4a6d7c, #3a5d6c);
+            opacity: 0.7;
+            clip-path: polygon(
+                0% 100%, 5% 80%, 10% 60%, 15% 50%, 20% 40%, 25% 35%,
+                30% 30%, 35% 25%, 40% 30%, 45% 40%, 50% 35%, 55% 30%,
+                60% 35%, 65% 40%, 70% 35%, 75% 40%, 80% 50%, 85% 60%,
+                90% 70%, 95% 80%, 100% 100%
+            );
+        }
+
+        /* Middle mountains */
+        .mountain-mid {
+            left: 0;
+            height: 180px;
+            background: linear-gradient(to bottom, #6a8d5c, #5a7d4c, #4a6d3c);
+            opacity: 0.85;
+            clip-path: polygon(
+                0% 100%, 8% 70%, 15% 55%, 22% 45%, 28% 40%,
+                35% 35%, 42% 40%, 48% 45%, 55% 40%, 62% 35%,
+                68% 40%, 75% 50%, 82% 60%, 90% 75%, 100% 100%
+            );
+        }
+
+        /* Front mountains (closest) */
+        .mountain-front {
+            left: 0;
+            height: 160px;
+            background: linear-gradient(to bottom, #7a9d6c, #6a8d5c, #5a7d4c);
+            clip-path: polygon(
+                0% 100%, 10% 65%, 18% 50%, 25% 45%, 32% 50%,
+                40% 60%, 48% 55%, 55% 50%, 63% 55%, 70% 60%,
+                78% 70%, 87% 80%, 95% 90%, 100% 100%
+            );
+        }
+
+        /* Beautiful Lake with reflections */
+        .lake {
+            position: absolute;
+            bottom: 12%;
+            width: 100%;
+            height: 40%;
+            background: linear-gradient(to bottom,
+                #4A90E2 0%,
+                #3A7AC8 30%,
+                #2A6AAE 60%,
+                #1A5A94 100%);
+            z-index: 6;
+            overflow: hidden;
+        }
+
+        /* Water shimmer effect */
+        .water-shimmer {
+            position: absolute;
+            width: 200%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent 0px,
+                rgba(255, 255, 255, 0.1) 10px,
+                transparent 20px
+            );
+            animation: shimmer 20s infinite linear;
+        }
+
+        @keyframes shimmer {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        /* Water ripples */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            animation: ripple-effect 4s infinite;
+        }
+
+        @keyframes ripple-effect {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 1;
+            }
+            100% {
+                width: 100px;
+                height: 100px;
+                opacity: 0;
+            }
+        }
+
+        .ripple1 {
+            top: 30%;
+            left: 40%;
+            animation-delay: 0s;
+        }
+
+        .ripple2 {
+            top: 50%;
+            left: 60%;
+            animation-delay: 1.5s;
+        }
+
+        .ripple3 {
+            top: 40%;
+            left: 75%;
+            animation-delay: 3s;
+        }
+
+        /* Waterfall/Stream flowing */
+        .water-flow {
+            position: absolute;
+            width: 30px;
+            height: 100%;
+            background: linear-gradient(to bottom,
+                rgba(255, 255, 255, 0.8),
+                rgba(255, 255, 255, 0.4),
+                transparent
+            );
+            opacity: 0.6;
+            animation: flow 3s infinite;
+        }
+
+        @keyframes flow {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        .flow1 {
+            left: 25%;
+            animation-delay: 0s;
+        }
+
+        .flow2 {
+            left: 50%;
+            animation-delay: 1s;
+        }
+
+        .flow3 {
+            left: 75%;
+            animation-delay: 2s;
+        }
+
+        /* Lake shore with grass */
+        .shore {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 20%;
+            background: linear-gradient(to bottom,
+                rgba(124, 179, 66, 0.5),
+                transparent
+            );
+        }
+
+        /* Ground/Village area */
+        .ground {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 35%;
+            background: linear-gradient(to bottom, #D2B48C, #C19A6B, #A0826D);
+            z-index: 7;
+        }
+
+        /* Traditional Houses */
+        .house {
+            position: absolute;
+            bottom: 12%;
+        }
+
+        .house-body {
+            width: 120px;
+            height: 80px;
+            background: linear-gradient(to bottom, #F5DEB3, #DEB887);
+            border: 2px solid #8B7355;
+            position: relative;
+        }
+
+        .house-roof {
+            position: absolute;
+            top: -40px;
+            left: -10px;
+            width: 0;
+            height: 0;
+            border-left: 70px solid transparent;
+            border-right: 70px solid transparent;
+            border-bottom: 50px solid #8B4513;
+        }
+
+        .house-roof::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -70px;
+            width: 0;
+            height: 0;
+            border-left: 70px solid transparent;
+            border-right: 70px solid transparent;
+            border-bottom: 50px solid #A0522D;
+        }
+
+        .door {
+            position: absolute;
+            bottom: 0;
+            left: 35%;
+            width: 30px;
+            height: 50px;
+            background: #654321;
+            border: 2px solid #4a3520;
+        }
+
+        .window {
+            position: absolute;
+            top: 20px;
+            width: 25px;
+            height: 25px;
+            background: #4a7c9e;
+            border: 2px solid #2d4a5a;
+        }
+
+        .window-left {
+            left: 10px;
+        }
+
+        .window-right {
+            right: 10px;
+        }
+
+        .house1 {
+            left: 5%;
+        }
+
+        .house2 {
+            left: 25%;
+        }
+
+        .house3 {
+            left: 70%;
+        }
+
+        /* Large Banyan Tree */
+        .tree {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            z-index: 9;
+        }
+
+        .tree-trunk {
+            width: 40px;
+            height: 120px;
+            background: linear-gradient(to right, #6B4423, #8B5A3C);
+            position: relative;
+            border-radius: 5px;
+        }
+
+        .tree-crown {
+            position: absolute;
+            top: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 160px;
+            background: radial-gradient(circle, #4a7c59, #3d6b4d, #2d5a3d);
+            border-radius: 50%;
+        }
+
+        .tree-crown::before,
+        .tree-crown::after {
+            content: '';
+            position: absolute;
+            background: radial-gradient(circle, #4a7c59, #3d6b4d);
+            border-radius: 50%;
+        }
+
+        .tree-crown::before {
+            width: 120px;
+            height: 100px;
+            top: -30px;
+            left: -40px;
+        }
+
+        .tree-crown::after {
+            width: 140px;
+            height: 110px;
+            top: -20px;
+            right: -50px;
+        }
+
+        /* People figures */
+        .person {
+            position: absolute;
+            bottom: 11%;
+            z-index: 10;
+        }
+
+        .person-head {
+            width: 15px;
+            height: 15px;
+            background: #8B4513;
+            border-radius: 50%;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .person-body {
+            width: 20px;
+            height: 35px;
+            background: #FF6347;
+            margin-top: 2px;
+            border-radius: 3px;
+        }
+
+        .person-body.female {
+            background: #FF1493;
+            width: 25px;
+            height: 40px;
+            clip-path: polygon(0 0, 100% 0, 120% 100%, -20% 100%);
+        }
+
+        .person-legs {
+            display: flex;
+            gap: 3px;
+            justify-content: center;
+        }
+
+        .leg {
+            width: 6px;
+            height: 20px;
+            background: #4a3520;
+            border-radius: 2px;
+        }
+
+        .person1 {
+            left: 15%;
+        }
+
+        .person2 {
+            left: 18%;
+        }
+
+        .person3 {
+            left: 35%;
+        }
+
+        .person4 {
+            left: 75%;
+        }
+
+        /* Buffalo */
+        .buffalo {
+            position: absolute;
+            bottom: 12%;
+            left: 40%;
+            z-index: 8;
+        }
+
+        .buffalo-body {
+            width: 80px;
+            height: 50px;
+            background: #2F2F2F;
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .buffalo-head {
+            position: absolute;
+            top: -10px;
+            left: -25px;
+            width: 30px;
+            height: 30px;
+            background: #2F2F2F;
+            border-radius: 8px;
+        }
+
+        .buffalo-horn {
+            position: absolute;
+            top: -5px;
+            width: 15px;
+            height: 15px;
+            background: #4a3520;
+            border-radius: 50% 50% 0 0;
+        }
+
+        .buffalo-horn.left {
+            left: -5px;
+            transform: rotate(-30deg);
+        }
+
+        .buffalo-horn.right {
+            right: -5px;
+            transform: rotate(30deg);
+        }
+
+        .buffalo-legs {
+            position: absolute;
+            bottom: -20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10px;
+        }
+
+        .buffalo-leg {
+            width: 8px;
+            height: 20px;
+            background: #2F2F2F;
+        }
+
+        /* Birds */
+        .bird {
+            position: absolute;
+            z-index: 3;
+            animation: fly 15s infinite linear;
+        }
+
+        .bird svg {
+            width: 30px;
+            height: 30px;
+        }
+
+        .bird1 {
+            top: 20%;
+            left: 30%;
+            animation-duration: 20s;
+        }
+
+        .bird2 {
+            top: 25%;
+            left: 50%;
+            animation-duration: 25s;
+            animation-delay: 3s;
+        }
+
+        .bird3 {
+            top: 18%;
+            left: 70%;
+            animation-duration: 18s;
+            animation-delay: 6s;
+        }
+
+        @keyframes fly {
+            from { transform: translate(0, 0); }
+            to { transform: translate(-150vw, 50px); }
+        }
+
+        /* Title and Info */
+        .title {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            font-size: 42px;
+            font-weight: bold;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
+            z-index: 100;
+            text-align: center;
+            font-family: 'Georgia', serif;
+        }
+
+        .subtitle {
+            position: absolute;
+            top: 85px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 20px;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+            z-index: 100;
+            font-style: italic;
+        }
+
+        .info {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 15px;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+            z-index: 100;
+            text-align: center;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="scene">
+        <!-- Sky -->
+        <div class="sky"></div>
+
+        <!-- Sun -->
+        <div class="sun"></div>
+
+        <!-- Clouds -->
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+
+        <!-- Birds -->
+        <div class="bird bird1">
+            <svg viewBox="0 0 100 100">
+                <path d="M 50,50 Q 30,30 20,50 M 50,50 Q 70,30 80,50"
+                      stroke="#333" stroke-width="3" fill="none"/>
+            </svg>
+        </div>
+        <div class="bird bird2">
+            <svg viewBox="0 0 100 100">
+                <path d="M 50,50 Q 30,30 20,50 M 50,50 Q 70,30 80,50"
+                      stroke="#333" stroke-width="3" fill="none"/>
+            </svg>
+        </div>
+        <div class="bird bird3">
+            <svg viewBox="0 0 100 100">
+                <path d="M 50,50 Q 30,30 20,50 M 50,50 Q 70,30 80,50"
+                      stroke="#333" stroke-width="3" fill="none"/>
+            </svg>
+        </div>
+
+        <!-- Title -->
+        <div class="title">Peaceful Mountain Lake</div>
+        <div class="subtitle">Early Morning Sunrise - 1990s Village Scene</div>
+
+        <!-- Beautiful Mountain Range -->
+        <div class="hills-container">
+            <div class="mountain-layer mountain-back"></div>
+            <div class="mountain-layer mountain-mid"></div>
+            <div class="mountain-layer mountain-front"></div>
+        </div>
+
+        <!-- Beautiful Lake with flowing water -->
+        <div class="lake">
+            <div class="water-shimmer"></div>
+            <div class="shore"></div>
+
+            <!-- Water ripples -->
+            <div class="ripple ripple1"></div>
+            <div class="ripple ripple2"></div>
+            <div class="ripple ripple3"></div>
+
+            <!-- Flowing water effects -->
+            <div class="water-flow flow1"></div>
+            <div class="water-flow flow2"></div>
+            <div class="water-flow flow3"></div>
+        </div>
+
+        <!-- Ground -->
+        <div class="ground"></div>
+
+        <!-- Traditional Houses -->
+        <div class="house house1">
+            <div class="house-body">
+                <div class="house-roof"></div>
+                <div class="window window-left"></div>
+                <div class="window window-right"></div>
+                <div class="door"></div>
+            </div>
+        </div>
+
+        <div class="house house2">
+            <div class="house-body">
+                <div class="house-roof"></div>
+                <div class="window window-left"></div>
+                <div class="window window-right"></div>
+                <div class="door"></div>
+            </div>
+        </div>
+
+        <div class="house house3">
+            <div class="house-body">
+                <div class="house-roof"></div>
+                <div class="window window-left"></div>
+                <div class="window window-right"></div>
+                <div class="door"></div>
+            </div>
+        </div>
+
+        <!-- Large Banyan Tree -->
+        <div class="tree">
+            <div class="tree-crown"></div>
+            <div class="tree-trunk"></div>
+        </div>
+
+        <!-- People/Families -->
+        <div class="person person1">
+            <div class="person-head"></div>
+            <div class="person-body"></div>
+            <div class="person-legs">
+                <div class="leg"></div>
+                <div class="leg"></div>
+            </div>
+        </div>
+
+        <div class="person person2">
+            <div class="person-head"></div>
+            <div class="person-body female"></div>
+            <div class="person-legs">
+                <div class="leg"></div>
+                <div class="leg"></div>
+            </div>
+        </div>
+
+        <div class="person person3">
+            <div class="person-head"></div>
+            <div class="person-body"></div>
+            <div class="person-legs">
+                <div class="leg"></div>
+                <div class="leg"></div>
+            </div>
+        </div>
+
+        <div class="person person4">
+            <div class="person-head"></div>
+            <div class="person-body female"></div>
+            <div class="person-legs">
+                <div class="leg"></div>
+                <div class="leg"></div>
+            </div>
+        </div>
+
+        <!-- Buffalo -->
+        <div class="buffalo">
+            <div class="buffalo-body">
+                <div class="buffalo-head">
+                    <div class="buffalo-horn left"></div>
+                    <div class="buffalo-horn right"></div>
+                </div>
+                <div class="buffalo-legs">
+                    <div class="buffalo-leg"></div>
+                    <div class="buffalo-leg"></div>
+                    <div class="buffalo-leg"></div>
+                    <div class="buffalo-leg"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info -->
+        <div class="info">
+            A serene 1990s village scene with majestic mountains and a tranquil lake<br>
+            Traditional homes • Village families • Buffalo • Ancient trees • Flowing water • Simple life
+        </div>
+    </div>
+</body>
+</html>
